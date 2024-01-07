@@ -23,6 +23,8 @@
     -   Code Syntax Highlight를 위한 prismjs 지원
 -   Google Analytics 연동
 -   Responive
+-   System 테마 연동
+-   이력서 페이지 @media print 지원
 
 ## Tech stack
 
