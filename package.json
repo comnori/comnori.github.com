@@ -1,0 +1,62 @@
+{
+  "name": "resume",
+  "version": "1.0.0",
+  "description": "comnori resume",
+  "author": "Yongsik Yun <comnori@gmail.com>",
+  "keywords": [
+    "gatsby",
+    "resume",
+    "gatsby-starter"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@mdx-js/react": "^3.0.0",
+    "antd": "^5.12.5",
+    "dotenv": "^16.3.1",
+    "framer-motion": "^10.16.16",
+    "gatsby": "^5.13.0",
+    "gatsby-plugin-google-gtag": "^5.13.0",
+    "gatsby-plugin-image": "^3.13.0",
+    "gatsby-plugin-manifest": "^5.13.0",
+    "gatsby-plugin-mdx": "^5.13.0",
+    "gatsby-plugin-sharp": "^5.13.0",
+    "gatsby-plugin-sitemap": "^6.13.0",
+    "gatsby-remark-images": "^7.13.0",
+    "gatsby-remark-katex": "^7.13.0",
+    "gatsby-remark-prismjs": "^7.13.0",
+    "gatsby-remark-responsive-iframe": "^6.13.0",
+    "gatsby-source-filesystem": "^5.13.0",
+    "gatsby-transformer-remark": "^6.13.0",
+    "gatsby-transformer-sharp": "^5.13.0",
+    "gh-pages": "^6.1.1",
+    "katex": "^0.16.9",
+    "prettier": "^2.8.8",
+    "prismjs": "^1.29.0",
+    "react": "^18.2.0",
+    "react-devicon": "^0.1.9",
+    "react-dom": "^18.2.0",
+    "reading-time": "^1.5.0",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
+    "remark-external-links": "^9.0.1",
+    "remark-gfm": "^3.0.1"
+  },
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "preview": "gatsby build && gatsby serve",
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/comnori/resume"
+  },
+  "bugs": {
+    "url": "https://github.com/comnori/resume/issues"
+  },
+  "homepage": "https://comnori.github.com/resume"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "gatsby-resume",
+  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "features": {
+    "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+      "packages": "xsel"
+    },
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+  "postCreateCommand": {
+    "preInit": "chmod +x ${containerWorkspaceFolder}/.devcontainer/scripts/init.sh",
+    "Init": "${containerWorkspaceFolder}/.devcontainer/scripts/init.sh > init.log"
+  },
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Gatsby development server"
+    }
+  },
+  "remoteEnv": {
+    "NODE_ENV": "development",
+    "GATSBY_TELEMETRY_DISABLED": "1",
+    "TZ": "Asia/Seoul",
+    "REACT_EDITOR": "code"
+  },
+  "remoteUser": "vscode",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "comnori.js-awesome-soho-extension-pack",
+        "unifiedjs.vscode-mdx",
+        "yzhang.markdown-all-in-one",
+        "CS50.extension-uninstaller",
+        "GraphQL.vscode-graphql",
+        "GraphQL.vscode-graphql-syntax"
+      ],
+      "settings": {
+        "extension-uninstaller.uninstall": ["dbaeumer.vscode-eslint", "SonarSource.sonarlint-vscode"],
+        // editor
+        "editor.codeActionsOnSave": {
+          "source.fixAll": true,
+          "source.organizeImports": true
+        },
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.fontFamily": "'D2Coding ligature',Menlo, Monaco, 'Courier New', monospace",
+        "editor.foldingImportsByDefault": true,
+        "editor.fontLigatures": true,
+        "editor.formatOnPaste": true,
+        "editor.formatOnSave": true,
+        // files
+        "files.exclude": {
+          "**/.DS_Store": true,
+          "**/.git": true,
+          "**/.hg": true,
+          "**/.svn": true,
+          "**/CVS": true,
+          "**/node_modules": true,
+          "**/Thumbs.db": true,
+          "**/.cache": true
+        },
+        //terminal
+        "terminal.integrated.defaultProfile.linux": "zsh",
+        "terminal.integrated.fontFamily": "'D2codingLigature Nerd Font Mono', monospace",
+        //telemetry
+        "gitlens.telemetry.enabled": false,
+        "sonarlint.disableTelemetry": true,
+        //apparence
+        "workbench.iconTheme": "material-icon-theme",
+        //diff
+        "semanticdiff.defaultDiffViewer": true
+      }
+    }
+  }
+}
