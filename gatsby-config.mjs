@@ -31,7 +31,7 @@ const config = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: [process.env.GA_ID],
+        trackingIds: [process.env.GOOGLE_ANALYTICS_ACCOUNT],
         pluginConfig: {
           head: true,
           respectDNT: true,
