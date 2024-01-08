@@ -1,24 +1,33 @@
 import dotenv from "dotenv"
-import { expand } from "dotenv-expand"
+
+import { access, constants } from "node:fs"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import remarkExternalLinks from "remark-external-links"
 import remarkGfm from "remark-gfm"
 
 function setupDotEnv(dotEnvFile) {
-  return expand(
-    dotenv.config({
-      path: dotEnvFile,
-      debug: true,
-    })
-  )
+  dotenv.config({
+    path: dotEnvFile,
+    debug: true,
+    override: true,
+  })
 }
 
-const dotEnvFiles = [`.env.${process.env.NODE_ENV}`, ".env"]
+const dotEnvFiles = [".env", `.env.${process.env.NODE_ENV}`]
 
 dotEnvFiles.forEach(dotEnvFile => {
-  setupDotEnv(dotEnvFile)
+  access(dotEnvFile, constants.F_OK, err => {
+    // Skip : Even if the file cannot be read, the build process must proceed.
+    if (err) {
+      console.warn(`${dotEnvFile} does not exists`)
+    }
+
+    setupDotEnv(dotEnvFile)
+  })
 })
+
+console.log("before", process.env.GOOGLE_ANALYTICS_ACCOUNT)
 
 const config = {
   siteMetadata: {
@@ -31,7 +40,7 @@ const config = {
     {
       resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingIds: [process.env.GA_ID],
+        trackingIds: [`${process.env.GOOGLE_ANALYTICS_ACCOUNT}`],
         pluginConfig: {
           head: true,
           respectDNT: true,

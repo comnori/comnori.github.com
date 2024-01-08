@@ -59,8 +59,6 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
-        with:
-          static_site_generator: gatsby
       - name: Restore cache
         uses: actions/cache@v3
         with:
