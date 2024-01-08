@@ -1,10 +1,24 @@
 import dotenv from "dotenv"
+import { expand } from "dotenv-expand"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import remarkExternalLinks from "remark-external-links"
 import remarkGfm from "remark-gfm"
 
-dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
+function setupDotEnv(dotEnvFile) {
+  return expand(
+    dotenv.config({
+      path: dotEnvFile,
+      debug: true,
+    })
+  )
+}
+
+const dotEnvFiles = [`.env.${process.env.NODE_ENV}`, ".env"]
+
+dotEnvFiles.forEach(dotEnvFile => {
+  setupDotEnv(dotEnvFile)
+})
 
 const config = {
   siteMetadata: {

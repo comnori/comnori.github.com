@@ -1,6 +1,5 @@
 import Icon from "@ant-design/icons/lib/components/Icon"
 import { Card, Divider, List, Space, Tag, Typography, Watermark } from "antd"
-import { Link } from "gatsby"
 import * as React from "react"
 
 const { Text } = Typography
@@ -27,15 +26,16 @@ const WorkList = ({ dataSource }) => {
             <Card
               title={title}
               extra={
-                <Link
-                  to={url}
+                <a
+                  href={url}
                   target="_blank"
-                  rel="author noreferrer">
+                  rel="author noreferrer"
+                  aria-label={`goto ${title} github repository`}>
                   <Icon
                     component={icon}
                     style={{ fontSize: "2em" }}
                   />
-                </Link>
+                </a>
               }
               hoverable>
               <Typography>
