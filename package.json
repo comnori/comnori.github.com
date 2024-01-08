@@ -1,7 +1,7 @@
 {
-  "name": "resume",
-  "version": "1.0.0",
-  "description": "comnori resume",
+  "name": "comnori.github.io",
+  "version": "1.0.1",
+  "description": "comnori resume and blog",
   "author": "Yongsik Yun <comnori@gmail.com>",
   "keywords": [
     "gatsby",
