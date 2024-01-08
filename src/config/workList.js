@@ -38,7 +38,7 @@ const workingList = [
     title: "Developer Resume and Blog",
     description:
       "Gatsby를 활용하여 개발자의 이력 및 블로그 포스팅을 위한 템플릿입니다. 현재 초급용 버전을 작업 중이며 중고급용 버전을 계획중에 있습니다. ",
-    url: "https://github.com/users/comnori/comnori.github.com",
+    url: "https://github.com/users/comnori/comnori.github.io",
     icon: GithubOutlined,
     isPrivate: true,
     tags: ["gatsby", "graphql", "devcontainer", "github pages", "github actions"],
