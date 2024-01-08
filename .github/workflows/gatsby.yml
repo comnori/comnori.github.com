@@ -73,6 +73,11 @@ jobs:
       - name: Build with Gatsby
         env:
           PREFIX_PATHS: "false"
+          GATSBY_UTTERANC_REPO: ${{vars.UTTERANC_REPO}}
+          GATSBY_UTTERANC_THEME: ${{vars.UTTERANC_THEME}}
+          GATSBY_UTTERANC_LABEL: ${{vars.UTTERANC_LABEL}}
+          GATSBY_UTTERANC_ISSUE_TERM: ${{vars.UTTERANC_ISSUE_TERM}}
+          GOOGLE_ANALYTICS_ACCOUNT: ${{vars.GOOGLE_ANALYTICS_ACCOUNT}}
         run: ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

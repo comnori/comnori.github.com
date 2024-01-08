@@ -1,31 +1,11 @@
 import dotenv from "dotenv"
 
-import { access, constants } from "node:fs"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypeSlug from "rehype-slug"
 import remarkExternalLinks from "remark-external-links"
 import remarkGfm from "remark-gfm"
 
-function setupDotEnv(dotEnvFile) {
-  dotenv.config({
-    path: dotEnvFile,
-    debug: process.env.NODE_ENV === "development",
-    override: true,
-  })
-}
-
-const dotEnvFiles = [".env", `.env.${process.env.NODE_ENV}`]
-
-dotEnvFiles.forEach(dotEnvFile => {
-  access(dotEnvFile, constants.F_OK, err => {
-    // Skip : Even if the file cannot be read, the build process must proceed.
-    if (err) {
-      console.warn(`${dotEnvFile} does not exists`)
-    }
-
-    setupDotEnv(dotEnvFile)
-  })
-})
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` })
 
 const config = {
   siteMetadata: {
