@@ -1,7 +1,7 @@
 {
-  "name": "resume",
-  "version": "1.0.0",
-  "description": "comnori resume",
+  "name": "comnori.github.io",
+  "version": "1.0.1",
+  "description": "comnori resume and blog",
   "author": "Yongsik Yun <comnori@gmail.com>",
   "keywords": [
     "gatsby",
@@ -14,7 +14,6 @@
     "@mdx-js/react": "^3.0.0",
     "antd": "^5.12.5",
     "dotenv": "^16.3.1",
-    "dotenv-expand": "^10.0.0",
     "framer-motion": "^10.16.16",
     "gatsby": "^5.13.0",
     "gatsby-plugin-google-gtag": "^5.13.0",
