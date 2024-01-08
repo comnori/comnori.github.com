@@ -193,10 +193,10 @@ const IndexPage = ({ data: { file } }) => {
             <Text>
               You can view the resume at{" "}
               <a
-                href="https://comnori.github.com"
+                href="https://comnori.github.io"
                 target="_blank"
                 rel="author noreferrer">
-                https://comnori.github.com
+                https://comnori.github.io
               </a>
               .
             </Text>

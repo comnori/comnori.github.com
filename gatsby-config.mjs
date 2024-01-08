@@ -27,12 +27,10 @@ dotEnvFiles.forEach(dotEnvFile => {
   })
 })
 
-console.log("before", process.env.GOOGLE_ANALYTICS_ACCOUNT)
-
 const config = {
   siteMetadata: {
     title: `Developer Yongsik Yun!`,
-    siteUrl: `https://comnori.github.com`,
+    siteUrl: `https://comnori.github.io`,
     twitterUsername: `@comnori`,
     image: `src/images/icon.png`,
   },
