@@ -27,8 +27,6 @@ dotEnvFiles.forEach(dotEnvFile => {
   })
 })
 
-console.log("before", process.env.GOOGLE_ANALYTICS_ACCOUNT)
-
 const config = {
   siteMetadata: {
     title: `Developer Yongsik Yun!`,
