@@ -3,6 +3,7 @@ import { Divider, Typography } from "antd"
 import { graphql } from "gatsby"
 import React from "react"
 import BasicLayout from "./BasicLayout"
+import { Comments } from "components/atoms/Comments"
 
 const { Title, Paragraph } = Typography
 
@@ -19,6 +20,7 @@ export default function PostTemplate({ data, children }) {
     <BasicLayout style={{ minHeight: "100%" }}>
       <Title>{data.mdx.frontmatter.title}</Title>
       <MDXProvider components={components}>{children}</MDXProvider>
+      <Comments/>
     </BasicLayout>
   )
 }

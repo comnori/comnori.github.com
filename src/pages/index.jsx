@@ -4,7 +4,7 @@ import TechStack from "components/markdown/tech-stack.mdx"
 import WorkList from "components/organisms/WorkList"
 import BasicLayout from "components/templates/BasicLayout"
 import { releaseList, workingList } from "config/workList"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import * as React from "react"
 
@@ -125,7 +125,9 @@ const IndexPage = ({ data: { file } }) => {
       <Row justify={"center"}>
         <Col>
           <Card>
-            <Flex justify="space-between">
+            <Flex
+              wrap="wrap"
+              gap="small">
               <GatsbyImage
                 image={cardImage}
                 style={{ display: "block" }}
@@ -145,6 +147,8 @@ const IndexPage = ({ data: { file } }) => {
             </Flex>
           </Card>
         </Col>
+      </Row>
+      <Row justify={"center"}>
         <Col>
           <Typography>
             <Title>My Career</Title>
@@ -187,7 +191,14 @@ const IndexPage = ({ data: { file } }) => {
         <Row justify={"center"}>
           <Col>
             <Text>
-              You can view the resume at <Link to="https://comnori.github.com">https://comnori.github.com</Link>.
+              You can view the resume at{" "}
+              <a
+                href="https://comnori.github.com"
+                target="_blank"
+                rel="author noreferrer">
+                https://comnori.github.com
+              </a>
+              .
             </Text>
           </Col>
         </Row>
@@ -200,7 +211,7 @@ export const query = graphql`
   query {
     file(relativePath: { eq: "icon.png" }) {
       childImageSharp {
-        gatsbyImageData(width: 512)
+        gatsbyImageData(width: 256)
       }
     }
   }
