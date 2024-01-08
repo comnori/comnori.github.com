@@ -23,7 +23,7 @@ dotEnvFiles.forEach(dotEnvFile => {
 const config = {
   siteMetadata: {
     title: `Developer Yongsik Yun!`,
-    siteUrl: `https://comnori.github.com`,
+    siteUrl: `https://comnori.github.io/`,
     twitterUsername: `@comnori`,
     image: `src/images/icon.png`,
   },

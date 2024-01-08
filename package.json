@@ -54,10 +54,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/comnori/resume"
+    "url": "https://github.com/comnori/comnori.github.com"
   },
   "bugs": {
-    "url": "https://github.com/comnori/resume/issues"
+    "url": "https://github.com/comnori/comnori.github.comissues"
   },
-  "homepage": "https://comnori.github.com/resume"
+  "homepage": "https://comnori.github.io"
 }
