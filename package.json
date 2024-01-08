@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "comnori resume and blog",
   "author": "Yongsik Yun <comnori@gmail.com>",
+  "type": "module",
   "keywords": [
     "gatsby",
     "resume",
