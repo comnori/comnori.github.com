@@ -9,7 +9,7 @@ import remarkGfm from "remark-gfm"
 function setupDotEnv(dotEnvFile) {
   dotenv.config({
     path: dotEnvFile,
-    debug: true,
+    debug: process.env.NODE_ENV === "development",
     override: true,
   })
 }
