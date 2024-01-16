@@ -1,0 +1,83 @@
+---
+title: vscode에서 스프링 부트를 자동으로 다시 로드하는 방법
+slug: /how_to_auto_reload_spring_boot_in_vscode
+date: 2024-01-10
+description: VSCode에서 Java 프로젝트를 개발할 때, 자동 빌드 후 Spring 리로드가 되지 않는 것은 매우 불편한 문제이다. 이를 해결해 봅시다.
+tags:
+    - springboot
+    - vscode
+---
+
+VSCode에서 Java 프로젝트를 개발할 때, 자동 빌드 후 Spring 리로드가 되지 않는 것은 매우 불편한 문제이다.
+이를 해결하기 위해 일반적으로 [Gradle continuous](https://blog.gradle.org/introducing-continuous-build)를 사용한다.
+
+**Terminal 1**
+```bash
+gradle build -t
+```
+
+**Terminal 2**
+```bash
+gradle bootRun
+```
+
+`Terminal 1`은 한 번만 구동하면 되지만, 매번 하는 것이 불편한 것은 사실이다.
+
+이 문제를 해결하기 위한 한 가지 방법은 VSCode의 `launch`의 `compounds`를 사용하는 것이다. `compounds`는 여러 개의 `launch`을 하나로 묶어서 실행할 수 있는 기능이다.
+
+## 해결 방안
+
+```json
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Spring Boot-BaseApplication",
+      "type": "java",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "kr.co.findthebest.Application",
+      "projectName": "workspace",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env",
+      "encoding": "UTF-8"
+    },
+    {
+      "name": "Run gradle continuous",
+      "type": "node-terminal",
+      "command": "gradle build --warning-mode=all -t --parallel --build-cache --configuration-cache",
+      "request": "launch",
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Auto build",
+      "configurations": [
+        "Run gradle start",
+        "Spring Boot-BaseApplication"
+      ],
+      "stopAll": true
+    }
+  ]
+}
+```
+
+
+위와 같이 `launch.json`을 수정하면, `Auto build`라는 이름의 `compounds`를 생성할 수 있다. 이 `compounds`를 실행하면, `Run gradle start`와 `Spring Boot-BaseApplication`이 순차적으로 실행된다. `Run gradle start`가 종료되면 Spring 리로드가 자동으로 이루어진다.
+
+이 방법은 터미널을 각각 기동해야 하던 것을 한번에 기동함으로서 번거로움을 없앨 수 있습니다.
+
+또 다른 방법은 task를 추가하여 `launch`에서 `preLaunchTask` 기능을 사용하는 것이지만 백그라운드 패턴 매치가 매끄럽지 않기 때문에 특정 상황에서의 실패 가능성도 줄일 수 있다.
+
+## 결론
+
+VSCode에서 Java 프로젝트를 개발할 때, 자동 빌드 후 Spring 리로드를 위한 방법으로 `compounds`를 사용하는 것이 효과적이다.
+
+이 방법을 사용하면, 번거로운 작업을 줄일 수 있습니다.
+
+## Related links
+
+- [Introducing Continuous Build Execution](https://blog.gradle.org/introducing-continuous-build)
+- [Compound launch configurations](https://code.visualstudio.com/docs/editor/debugging#_compound-launch-configurations)
+- [Integrate with External Tools via Tasks](https://code.visualstudio.com/docs/editor/tasks)
