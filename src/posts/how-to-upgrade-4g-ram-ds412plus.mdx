@@ -1,0 +1,92 @@
+---
+title: DS412+ 4G 메모리 업그레이드 과정
+slug: /how-to-upgrade-4g-ram-ds412plus
+date: 2024-01-27
+description:  Synology DS412+의 메모리를 4GB로 업그레이드하는 방법에 대해 설명합니다.
+tags:
+    - synology
+    - ds412+
+    - upgrade
+    - homelab
+---
+
+Synology DS412+는 기본적으로 1GB의 메모리를 탑재하고 있습니다. 이로 인해 Docker와 같은 메모리 집약적인 애플리케이션을 실행할 때 성능 저하가 발생할 수 있습니다.
+
+이 문서에서는 Synology DS412+의 메모리를 4GB로 업그레이드하는 방법에 대해 설명합니다.
+
+**주의 사항**
+
+- 메모리 업그레이드 시에는 Synology DS412+의 전원을 끈 상태에서 진행해야 합니다.
+- 메모리 슬롯에 메모리를 삽입할 때는 손가락으로 가볍게 밀어 넣어야 합니다. 너무 세게 밀면 메모리가 손상될 수 있습니다.
+- 조건에 맞지 않는 메모리는 업그레이드 전보다 성능이 더 낮아집니다.
+- 이 모든 과정에 대한 책임은 본인에게 있습니다.
+
+## 준비물
+
+1. 삼성 4GB 2Rx8 PC3-12800S-11-10-F2 (양면)
+   > 4G의 경우 아래 조건의 메모리가 아닐 경우 호환성 이슈로 인하여 부팅 불가 또는 성능 하락과 같은 비정상적인 상황이 발생할 수 있습니다.
+	- 16개의 칩으로 구성
+	- 2 Rank
+	- 1.5v or 1.35v
+2. 십자 드라이버
+3. 일자 드라이버
+
+## 메모리 변경
+
+iFixit의 [Synology DiskStation DS412+ RAM Replacement](https://ko.ifixit.com/Guide/Synology+DiskStation+DS412++RAM+Replacement/34079) 참조하여 분해.
+
+> 4단계에서 빨간색 네모 사이를 튼튼한 일자 드라이버로 많이 휘어지게 만드는 것이 분해에 용이함.
+
+## 부팅 테스트
+
+메모리 설치 후 Synology DS412+를 부팅합니다.
+
+`DSM`에 접속하여 `제어판` > `정보센터`에서 총 물리적 메모리가 **4096M**로 표시되면 정상적으로 설치된 것입니다.
+
+## 시스템 설정 변경
+
+Synology DS412+는 기본적으로 사용 가능한 메모리가 1GB로 제한되어 있습니다. 이를 변경하려면 다음과 같은 설정을 변경해야 합니다.
+
+1. SSH를 통해 다음 파일을 엽니다.
+2. `/etc/synoinfo.conf`와 `/etc.default/synoinfoconf` 2개의 파일에서 `mem_default_mb`와 `mem_max_mb`를 찾아 다음과 같이 변경합니다.
+   
+	```properties
+	mem_default_mb="4096"
+	mem_max_mb="4096"
+	```
+	
+3. 변경 사항을 저장하고 파일을 닫습니다.
+4. Synology DS412+를 재부팅합니다.
+
+### 성능 향상
+
+4GB 메모리로 업그레이드만 해도 시스템 반응성이 개선됩니다. 하지만 Docker와 같은 메모리 집약적인 애플리케이션을 실행할 때 성능 향상을 위해 다음과 같은 설정을 변경할 수 있습니다.
+
+#### 스왑 영역 사용 정도 변경
+
+`/usr/syno/share/synotuned/profiles/` 폴더에서`performance_throughput.conf`와 `performance_latency.conf` 2개 파일을 다음과 같이 내용을 변경합니다.
+
+```properties
+vm.swappiness=30
+```
+
+#### 추가적인 향상
+
+`/etc/sysctl.conf` 및 `/etc.default/sysctl.conf` 파일에 다음과 같은 내용을 추가합니다.
+
+```properties
+vm.max_map_count = 262144
+vm.min_free_kbytes = 1048576
+vm.vfs_cache_pressure = 75
+```
+
+## 결론
+
+적은 비용으로 DS412+의 반응성 향상 및 하드 디스크 작동 소음 발생 빈도 감소되었습니다.
+
+
+## 참조 및 관련 링크
+
+- [Intel® Atom™ Processor D2000 and N2000 Series Data sheet](https://docs.google.com/viewer?url=https%3A%2F%2Fwww.intel.sg%2Fcontent%2Fdam%2Fdoc%2Fdatasheet%2Fatom-d2000-n2000-vol-1-datasheet.pdf)
+- [DS412+ 4G RAM Upgrade - Reduced CPU - Working](https://community.synology.com/enu/forum/1/post/128338)
+- [Processor usage increases with 4GB RAM installed](https://unix.stackexchange.com/questions/68242/processor-usage-increases-with-4gb-ram-installed)
