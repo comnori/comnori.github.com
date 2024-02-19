@@ -32,8 +32,8 @@ const descItemList = [
     children: (
       <Tag
         icon={<SyncOutlined spin />}
-        color="processing">
-        Looking for a job
+        color="green">
+        Working
       </Tag>
     ),
     span: 3,
@@ -41,6 +41,14 @@ const descItemList = [
 ]
 
 const timelineItemList = [
+  {
+    label: "2024.02 ~",
+    children: (
+      <>
+        <Tag color="processing">Full-time</Tag>Woongjin Co., Ltd.
+      </>
+    ),
+  },
   {
     label: "2022.10 ~ 2022.12",
     children: (
